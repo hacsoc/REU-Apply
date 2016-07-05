@@ -1,10 +1,25 @@
 {
   "name": "reuapp",
-  "private": true,
+  "version": "1.0.0",
+  "description": "An app to help with REU(Research Experience for Undergraduates) Applications",
+  "main": "index.js",
   "scripts": {
-    "start": "meteor run"
+    "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smithy545/REU-Apply.git"
+  },
+  "keywords": [
+    "reu"
+  ],
+  "author": "Philip Arturo Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smithy545/REU-Apply/issues"
+  },
+  "homepage": "https://github.com/smithy545/REU-Apply#readme",
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
+    "express": "^4.14.0"
   }
 }
