@@ -74,16 +74,21 @@ router.get('/auth/linkedin/callback', function(req, res) {
     if(req.query.error) throw req.query.error;
     if(req.query.state != "0928354") throw "CSRF Attack error";
 
-    if(req.user.linkedin.token) {
+    var li = req.user.linkedin;
+    // ignore this for now
+    if(li && li.token && li.timestamp && (new Date()).getTime()/1000 - li.timestamp.getTime()/1000 < 60*60*24*60) {
 	var options = {
 	    url: "https://api.linkedin.com/v1/people/~?format=json",
 	    headers: {
-		Authorization: "Bearer " + req.user.linkedin.token,
+		Authorization: "Bearer " + li.token,
 	    }
 	};
+
 	request.post(options, function(err, resp, body) {
 	    if(err) throw err;
-	    if(body.error) throw body.error;
+	    var data = JSON.parse(body);
+	    if(data.error) throw data.error;
+
 	    res.render('profile', { user: req.user });
 	});
     } else {
@@ -104,17 +109,27 @@ router.get('/auth/linkedin/callback', function(req, res) {
 	};
     
 	request.post(options, function(err, resp, body) {
-	if(err) throw err;
-	    if(body.error) throw body.error;
+	    if(err) throw err;
+	    var data = JSON.parse(body)
+	    if(data.error) throw data.error;
+	    User.findById(req.user._id, function(err, user) {
+		if(err) throw err;
+
+		user.linkedin.token = data["access_token"];
+		user.linkedin.timestamp = new Date();
+		user.save();
+	    });
 	    var options = {
 		url: "https://api.linkedin.com/v1/people/~?format=json",
 		headers: {
-		    Authorization: "Bearer " + body.access_token,
+		    Authorization: "Bearer " + data.access_token,
 		}
 	    };
 	    request.post(options, function(err, resp, body) {
 		if(err) throw err;
-		if(body.error) throw body.error;
+		var data = JSON.parse(body);
+		if(data.error) throw data.error;
+
 		res.render('profile', { user: req.user });
 	    });
 	});

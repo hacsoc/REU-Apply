@@ -6,11 +6,11 @@ var userSchema = mongoose.Schema({
         email      : String,
         password   : String,
     },
-    linkedIn       : {
+    linkedin       : {
         id         : String,
         token      : String,
+	timestamp  : Date,
         email      : String,
-        username   : String
     },
     profile        : {
         first_name : String,
