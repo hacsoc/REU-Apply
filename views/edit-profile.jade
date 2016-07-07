@@ -1,0 +1,23 @@
+extends layout
+
+block title
+  title Profile
+
+block content
+  h1.content-header#profile-header Profile
+  br
+  br
+  - if(typeof(flash) !== 'undefined') {
+    - if(flash.type === 'invalid') {
+      div.alert.alert-danger
+        =flash.message
+    - } else if(flash.type === 'notice') {
+      div.alert
+        =flash.message
+    - }
+  - }
+  form(method="post")
+    fieldset.form-group
+      label(for="editEmail") Email
+        input.form-control(id="editEmail" name="email" type="email" value="#{user.local.email}")
+    button.btn.btn-primary(type="submit") Save

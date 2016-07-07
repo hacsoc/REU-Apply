@@ -1,4 +1,37 @@
 extends layout
 
+block top_navbar
+  // No navbar content
 block content
-  |test
+  - if(flash.length > 0) {
+    div.alert.alert-danger
+      |#{flash}
+  - }
+  form(action="sign-up" method="post" id="loginForm" )
+    fieldset.form-group
+      label(for="emailInput") Email address
+        input.form-control(name="email" type="email" id="emailInput" required)
+    fieldset.form-group
+      label(for="passwordInput") Password
+        input.form-control(name="password" type="password" id="passwordInput" required)
+    fieldset.form-group
+      label(for="passwordInput2") Confirm Password
+        input.form-control(name="passconfirm" type="password" id="passwordInput2" required)
+    button.btn.btn-primary(type="submit") Submit
+
+block script
+  script.
+    function confirmPassword() {
+      var pass = $("#passwordInput");
+      var confirm = $("#passwordInput2");
+      if(pass.val() != confirm.val()) {
+        confirm.each(function() {
+          this.setCustomValidity("Passwords Don't Match");
+        });
+      } else {
+        confirm.each(function() {
+          this.setCustomValidity("");
+        });
+      }
+    }
+    $("#passwordInput2").change(confirmPassword);

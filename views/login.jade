@@ -1,0 +1,20 @@
+extends layout
+
+block top_navbar
+  // No topbar
+
+block content
+  - if(flash.length > 0) {
+    div.alert.alert-danger
+      |#{flash}
+  - }
+  form(action="login" method="post" id="loginForm" )
+    fieldset.form-group
+      label(for="emailInput") Email address
+        input.form-control(name="email" type="email" id="emailInput" required)
+    fieldset.form-group
+      label(for="passwordInput") Password
+        input.form-control(name="password" type="password" id="passwordInput" required)
+    button.btn.btn-primary(type="submit") Submit
+  br
+  p Need an account? <a href="/sign-up">Sign up</a>

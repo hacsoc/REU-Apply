@@ -1,61 +1,47 @@
 doctype html
 html
   head
-    title= title
+    block head
+    
+    block title
+      title REU Apply
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     nav(class="navbar navbar-default navbar-fixed-top")
+      a.navbar-brand(href="") REU Apply
       div.container
         div.navbar-header
-          a.navbar-brand(href="/") Home
-        div(class="collapse navbar-collapse")
-          ul(class="nav navbar-nav")
-            li
-              a(href="/about") About
-          ul(class="nav navbar-nav navbar-right")
-            li.dropdown
-              a(href="#" class="dropdown-toggle" data-toggle="dropdown" id="sign-in")
-                |Log in
-                span.caret
-              ul(id="login-dp" class="dropdown-menu")
-                li
-                  div.row
-                    div.col-md-12
-                      form.form(role="form" method="post" action="/login" accept-charset"UTF-8" id="login-nav")
-                        div.form-group
-                          label.sr-only(for="email") Email address
-                          input.form-control(type="email" id="email" placeholder="Email address" required)
-                        div.form-group
-                          label.sr-only(for="password") Password
-                          input.form-control(type="password" id="password" placeholder="Password" required)
-                          div.help-block.text-right
-                            a(href="/forgotten-password") Forget the password?
-                        div.form-group
-                          button.btn.btn-primary.btn-block(type="submit") Sign in
-                        div.checkbox
-                          label
-                            input(type="checkbox")
-                            |keep me logged-in
-                      div.bottom.text-center
-                        |Don't have an account? 
-                        a(href="/sign-up")
-                          b Sign up here
+        block top_navbar
+          div(class="collapse navbar-collapse")
+            ul(class="nav navbar-nav")
+              li
+                a(href="/home" id="dashboard") Dashboard
+              li
+                a(href="/profile" id="profile") Profile
+            ul(class="nav navbar-nav navbar-right")
+              li
+                a(href="/logout") Logout
     div.container
       div(class="row main")
         if side_menu
-          nav(class="sidebar-nav navbar navbar-light")
-            span.sidebar-header
+          nav(class="sb-nav navbar navbar-light")
+            span.sb-header
               = side_menu.title
             ul(class="nav navbar-nav")
               each item in side_menu.items
                 li
                   a(href=item.href)= item.text
+          div.content
+            block content
         else
-          div.sidebar-filler
-            &nbsp
-        div.content
-          block content
+          div.content-wide
+            block content
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
     script(src="/javascripts/bootstrap.min.js")
+    script.
+      var highlighted = $("##{tb_highlighted}");
+      highlighted.attr("class", "tb-highlighted");
+      
+    block script

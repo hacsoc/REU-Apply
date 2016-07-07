@@ -7,7 +7,12 @@ a {
   color: #00B7FF;
 }
 
-.sidebar-nav {
+.tb-highlighted {
+    color: #FFFFFF !important;
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+.sb-nav {
     display: block;
     float: left;
     background-color: rgba(0,0,0,0.2);
@@ -16,32 +21,25 @@ a {
     min-width: 100px;
 }
 
-.sidebar-filler {
-    display: block;
-    float: left;
-    padding: 10px;
-    width: 10%;
-}
-
-.sidebar-nav {
+.sb-nav {
     clear: left;
 }
 
-.sidebar-nav ul {
+.sb-nav ul {
     clear: left;
     list-style: none;
 }
 
-.sidebar-nav li {
+.sb-nav li {
     clear: left;
 }
 
-.sidebar-nav a {
+.sb-nav a {
     color: rgba(0,0,0,0.8);
     text-decoration: none;
 }
 
-.sidebar-header {
+.sb-header {
     color: #000;
     display: block;
     float: left;
@@ -55,63 +53,36 @@ a {
 .content {
     float: left;
     margin-left: 10px;
-    padding-top: 20px;
-    padding-left: 10px;
+    padding: 10px;
     border: 1px solid #000000;
     width: 80%;
+}
+
+.content-wide {
+    float: left;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    width: 90%;
 }
 
 .content-header {
     margin-top: 0px;
 }
 
-#login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,1);
+#edit-profile-button {
+    margin-left: 10px;
 }
-#login-dp .help-block{
-    font-size:12px
+
+#profile-header {
+    display: inline;
 }
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+
+#profile-section-header {
 }
-#login-dp .social-buttons{
-    margin:12px 0
+
+#profile-email-header {
 }
-#login-dp .social-buttons a{
-    width: 49%;
-}
-#login-dp .form-group {
-    margin-bottom: 10px;
-}
-.btn-fb{
-    color: #fff;
-    background-color:#3b5998;
-}
-.btn-fb:hover{
-    color: #fff;
-    background-color:#496ebc
-}
-.btn-tw{
-    color: #fff;
-    background-color:#55acee;
-}
-.btn-tw:hover{
-    color: #fff;
-    background-color:#59b5fa;
-}
-@media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom{
-        background-color: inherit;
-        border-top:0 none;
-    }
+
+#profile-email {
 }

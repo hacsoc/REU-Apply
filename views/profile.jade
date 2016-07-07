@@ -1,0 +1,19 @@
+extends layout
+
+block title
+  title Profile
+  
+block content
+  div.content-header
+    h1#profile-header Profile
+    a.btn.btn-primary#edit-profile-button(href="/profile/edit") Edit
+  br
+  - if(typeof(flash) !== 'undefined') {
+    - if(flash.type === 'success') {
+      div.alert.alert-success
+        =flash.message
+    - }
+  - }
+  p#profile-section-header Account Info
+  p#profile-email-header Email
+  p#profile-email #{user.local.email}
