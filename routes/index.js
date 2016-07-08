@@ -114,7 +114,7 @@ router.get('/auth/linkedin/callback', function(req, res) {
 
 function getLinkedInProfile(user, res) {
     var options = {
-	url: "https://api.linkedin.com/v1/people/~:(id,num-connections,picture-url)?format=json",
+	url: "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,formatted-name,headline,location,industry,summary,specialties,positions,public-profile-url,picture-url,associations,interests,publications,patents,languages,skills,certifications,educations,courses,volunteer,recommendations-received,date-of-birth,honors-awards)?format=json",
 	headers: {
 	    Authorization: "Bearer " + user.linkedin.token,
 	}
@@ -127,7 +127,30 @@ function getLinkedInProfile(user, res) {
 	    console.log(data);
 	    throw "LinkedIn Request error";
 	}
-	
+
+	user.first_name = data.firstName;
+	user.last_name = data.lastName;
+	user.formatted_name = data.firstName + " " + data.lastName;
+	user.headline = data.headline;
+	user.location = data.location;
+	user.summary = data.summary;
+	user.specialties = data.specialties;
+	user.positions = data.positions;
+	user.linkedin_url = data.publicProfileUrl;
+	user.associations = data.associations;
+	user.interests = data.interests;
+	user.publications = data.publications;
+	user.patents = data.patents;
+	user.languages = data.languages;
+	user.skills = data.skills;
+	user.certifications = data.certifications;
+	user.educations = data.educations;
+	user.courses = data.courses;
+	user.volunteer = data.volunteer;
+	user.recommendations_received = data.recommendationsReceived;
+	user.dob = data.dateOfBirth;
+	user.honors_awards = data.honorsAwards;
+	user.save()
 	console.log(data);
 	res.render('profile', { user: user });
     });
