@@ -25,7 +25,7 @@ router.post('/sign-up', passport.authenticate('local-signup', {
 
 // process the login form
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
+    successRedirect : '/home', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
@@ -35,6 +35,7 @@ router.use(isLoggedIn);
 /* GET home page. */
 router.get('/home',  function(req, res) {
     var ctx = {
+        user: req.user,
         tb_highlighted: "dashboard",
     };
     

@@ -25,6 +25,7 @@ html
                 a(href="/reu" id="reu") REUs
             ul(class="nav navbar-nav navbar-right")
               li
+                //.topbar-name= user.profile.first_name + " " + user.profile.last_name
                 a(href="/logout") Logout
     div.container.main-outer
       div.row.main-inner
@@ -36,7 +37,7 @@ html
     script(src="/javascripts/bootstrap.min.js")
     script(src="/javascripts/init.js")
     script.
-      var highlighted = $("##{tb_highlighted}");
+      var highlighted = $("#{tb_highlighted}");
       highlighted.attr("class", "tb-highlighted");
       
     block script

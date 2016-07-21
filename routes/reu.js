@@ -10,7 +10,7 @@ reu.get('/', function(req, res) {
         user: req.user,
         tb_highlighted: 'reu',
     };
-    res.render('reu', ctx);
+    res.render('reu/search', ctx);
 });
 
 reu.post('/search', function(req, res) {
@@ -30,10 +30,10 @@ reu.post('/search', function(req, res) {
         if(err) {
             console.log(err);
             ctx.results = [];
-            return res.render('reu', ctx);
+            return res.render('reu/search', ctx);
         }
         ctx.results = reus;
-        return res.render('reu', ctx);
+        return res.render('reu/search', ctx);
     });
 });
 

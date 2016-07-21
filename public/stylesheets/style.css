@@ -107,3 +107,7 @@ a {
     background-color: rgba(0,0,0,0.1);
     padding: 10px;
 }
+
+a.topbar-name {
+    float: right;
+}

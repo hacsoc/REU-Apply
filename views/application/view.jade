@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block title
   title Applications
@@ -11,6 +11,8 @@ block content
   - } else {
     ul.application-list
     each app in applications
-      li
-        p= app
+      - if(app.status != "unsubmitted"){
+        li
+          p= app
+      - }
   - }

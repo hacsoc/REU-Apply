@@ -6,6 +6,7 @@ var Application = require('../models/application');
 var apps = express.Router();
 
 apps.get('/', function(req, res) {
+    //console.log(req.user);
     var ctx = {
         user: req.user,
         tb_highlighted: 'apps',
@@ -18,7 +19,7 @@ apps.get('/', function(req, res) {
         }, function(err, apps) {
             if(err) throw err;
             ctx.applications = apps;
-            return res.render('application', ctx);
+            return res.render('application/view', ctx);
         });
     });
 });
