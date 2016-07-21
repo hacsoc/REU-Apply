@@ -7,10 +7,18 @@ block content
   ul.application-list
   - if(applications.length == 0) {
     p You have no submitted applications
-    a(href="/reu") Click here to search for new Research Experience opportunites
   - } else {
-    ul.application-list
-    each app in applications
-      li
-        p= app
+    - var i = 0
+    div.panel-group(id="application-list")
+      each app in applications
+        - i++
+        div.panel.panel-default
+          div.panel-heading
+            h4.panel-title
+              a(data-toggle="collapse" data-parent="#application-list" href="#app#{i}") #{app.name}
+          div.panel-collapse.collapse(id="app#{i}")
+            div.panel-body
+              ul.app-info
+                li
+                  p stuff2
   - }

@@ -3,16 +3,33 @@ extends ../layout
 block title
   title Applications
   
+block sidemenu
+  - if(applications.length !== 0) {
+  nav.sb-nav.navbar.navbar-light
+    span.sb-header Applications
+    ul.nav.navbar-nav.sb-select
+      - var i = 0
+      each app in applications
+        - i++
+        li
+          a(href="#app#{i}") #{app.name}
+  - }
 block content
-  ul.application-list
   - if(applications.length == 0) {
     p You have no current applications
     a(href="/reu") Click here to search for new Research Experience opportunites
   - } else {
-    ul.application-list
+    - var i = 0
     each app in applications
-      - if(app.status != "unsubmitted"){
-        li
-          p= app
+      - i++
+      - if(typeof(active) !== 'undefined' && active === app._id) {
+        div.content-container(id="app#{i}")
+          p= app.name
+      - }  else if(typeof(active) === 'undefined' && i === 1) {
+        div.content-container(id="app#{i}")
+          p= app.name
+      - } else {
+        div.content-container(id="app#{i}" hidden)
+          p= app.name
       - }
   - }

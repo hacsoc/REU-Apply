@@ -23,21 +23,28 @@ html
                 a(href="/profile/edit" id="profile") Profile
               li
                 a(href="/reu" id="reu") REUs
-            ul(class="nav navbar-nav navbar-right")
+            ul.nav.navbar-nav.navbar-right
               li
-                //.topbar-name= user.profile.first_name + " " + user.profile.last_name
+                p.navbar-text= user.profile.first_name + " " + user.profile.last_name
+              li
                 a(href="/logout") Logout
     div.container.main-outer
       div.row.main-inner
         block sidemenu
         div.content
+          - if(typeof(flash) !== 'undefined') {
+            - if(flash.type === 'success') {
+              div.alert.alert-success
+                =flash.message
+            - }
+          - }
           block content
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
     script(src="/javascripts/bootstrap.min.js")
     script(src="/javascripts/init.js")
     script.
-      var highlighted = $("#{tb_highlighted}");
+      var highlighted = $("##{tb_highlighted}");
       highlighted.attr("class", "tb-highlighted");
       
     block script

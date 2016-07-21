@@ -42,7 +42,8 @@ router.get('/home',  function(req, res) {
     User.findById(req.user._id, function(err, user) {
         if(err) throw err;
         Application.find({
-            '_id': { $in: user.applications }
+            '_id': { $in: user.applications },
+            'status': { $ne : "unsubmitted" },
         }, function(err, apps) {
             if(err) throw err;
             ctx.applications = apps;

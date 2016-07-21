@@ -6,24 +6,17 @@ block title
 block sidemenu
   nav(class="sb-nav navbar navbar-light")
     span.sb-header Profile
-    ul(class="nav navbar-nav sb-select")
+    ul.nav.navbar-nav.sb-select
       li
         a(href="#personal") Personal
+      li
         a(href="#education") Education
+      li
         a(href="#extracurricular") Extracurricular
+      li
         a(href="#account") Account
 
 block content
-  - if(typeof(flash) !== 'undefined') {
-    - if(flash.type === 'invalid') {
-      div.alert.alert-danger
-        =flash.message
-    - } else if(flash.type === 'notice') {
-      div.alert
-        =flash.message
-    - }
-  - }
-  
   a.btn.btn-primary(href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77tgqz6flgej2j&redirect_uri=http%3A%2F%2Freu-apply.com%2Fauth%2Flinkedin%2Fcallback&state=0928354") Update from LinkedIn
 
   br

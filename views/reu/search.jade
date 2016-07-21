@@ -4,27 +4,43 @@ block title
   title REU
   
 block content
-  - if(typeof(flash) !== 'undefined') {
-    - if(flash.type === 'success') {
-      div.alert.alert-success
-        =flash.message
-    - }
-  - }
-
   form.search-reu(action="/reu/search" method="post")
     div.input-group
       input.form-control(name="reu_search_info" placeholder="Search for...")
       span.input-group-btn
         button.btn.btn-default(type="button") Search
 
-    div.reu-search-results
-      - if(results) {
-        - if(results.length == 0) {
-          p No results found :(
-        - } else {
-          ul.reu-search-list
-            each result in results
-              li
-                p= result
-        - }
+  br
+
+  - if(results) {
+    - if(results.length == 0) {
+      p No results found :(
+    - } else {
+      - var i = 0
+      div.panel-group(id="reu-search-results")
+        each result in results
+          - i++
+          div.panel.panel-default
+            div.panel-heading
+              h4.panel-title
+                a(data-toggle="collapse" data-parent="#reu-search-results" href="#result#{i}") #{result.name}
+            div.panel-collapse.collapse(id="result#{i}")
+              div.panel-body
+                ul.reu-info
+                  li
+                    p School: #{result.school}
+                  li
+                    p Location: #{result.location}
+                  li
+                    p Professors:
+                    ul.reu-professors
+                      each professor in result.professors
+                        li
+                          p #{professor}
+                br
+                br
+                form(name="apply" method="post" action="/apps/apply")
+                  input(name="reu" type="text" value="#{result._id}" hidden)
+                  button.btn.btn-default Apply
     - }
+  - }

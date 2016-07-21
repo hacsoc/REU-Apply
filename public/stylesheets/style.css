@@ -108,6 +108,14 @@ a {
     padding: 10px;
 }
 
-a.topbar-name {
-    float: right;
+ul.reu-info {
+    list-style: none;
+}
+
+ul.sb-select {
+    width: 100%;
+}
+
+ul.sb-select li{
+    width: 100%;
 }

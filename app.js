@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
+var mongo_express = require('mongo-express/lib/middleware');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // DB setup
 require('./config/database.js')(mongoose);
+var mongo_express_config = require('./config/admin.js');
 
 // Auth setup
 require('./config/passport')(passport);
@@ -38,12 +40,15 @@ app.use('/', require('./routes/index'));
 app.use('/profile', require('./routes/profile'));
 app.use('/reu', require('./routes/reu'));
 app.use('/apps', require('./routes/application'));
+app.use('/admin', require('./routes/admin'));
+app.use('/db', mongo_express(mongo_express_config));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render('404', {});
 });
 
 // error handlers

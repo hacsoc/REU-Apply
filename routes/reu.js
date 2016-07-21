@@ -10,7 +10,16 @@ reu.get('/', function(req, res) {
         user: req.user,
         tb_highlighted: 'reu',
     };
-    res.render('reu/search', ctx);
+
+    REU.find({}, function(err, reus) {
+        if(err) {
+            console.log(err);
+            ctx.results = [];
+            return res.render('reu/search', ctx);
+        }
+        ctx.results = reus;
+        return res.render('reu/search', ctx);
+    });
 });
 
 reu.post('/search', function(req, res) {
@@ -19,13 +28,14 @@ reu.post('/search', function(req, res) {
         tb_highlighted: 'reu',
     };
 
-    var searchRXP = new RegExp(req.body.reu_search_info);
+    var searchRXP = new RegExp(req.body.reu_search_info, 'i');
 
-    REU.find({
-        name: searchRXP,
-        school: searchRXP,
-        location: searchRXP,
-        professors: searchRXP
+    REU.find({ $or:[
+        {'name': searchRXP},
+        {'school': searchRXP},
+        {'location': searchRXP},
+        {'professors': searchRXP}
+        ]
     }, function(err, reus) {
         if(err) {
             console.log(err);

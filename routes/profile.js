@@ -50,6 +50,7 @@ profile.post('/edit', function(req, res) {
         }
 
         user.save();
+        ctx.user = user;
         ctx.flash = { type: 'success', message: "Profile updated successfully!" };
         res.render('profile/edit', ctx);
     });
