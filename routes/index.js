@@ -4,6 +4,7 @@ var validator = require('validator');
 var request = require('request');
 
 var User = require('../models/user');
+var Application = require('../models/application');
 
 var router = express.Router();
 
@@ -33,28 +34,20 @@ router.use(isLoggedIn);
 
 /* GET home page. */
 router.get('/home',  function(req, res) {
-    var side_menu = {
-        title: "Home",
-        items: [
-            { href: "#",
-              text: "tset 1" },
-            { href: "#",
-              text: "test2" },
-            { href: "#",
-              text: "test 3"},
-        ],
-    };
-
     var ctx = {
-        side_menu: side_menu,
         tb_highlighted: "dashboard",
     };
     
-    res.render('home', ctx);
-});
-
-router.get('/about', function(req, res) {
-    res.render('about');
+    User.findById(req.user._id, function(err, user) {
+        if(err) throw err;
+        Application.find({
+            '_id': { $in: user.applications }
+        }, function(err, apps) {
+            if(err) throw err;
+            ctx.applications = apps;
+            return res.render('home', ctx);
+        });
+    });
 });
 
 router.get('/forgotten-password', function(req, res) {
@@ -81,28 +74,26 @@ router.get('/auth/linkedin/callback', function(req, res) {
 	    getLinkedInProfile(user, res);
 	} else {
 	    var options = {
-		uri: 'https://www.linkedin.com/oauth/v2/accessToken',
-		headers: {
-		},
-		qs: {
-		    client_id: '77tgqz6flgej2j',
-		    client_secret: 'jGjoCdApJjgkGtdG',
-		    grant_type: 'authorization_code',
-		    redirect_uri: 'http://reu-apply.com/auth/linkedin/callback',
-		    code: req.query.code,
-		    scope: 'r_fullprofile'
-		},
-		headers: {
-		    'Content-Type': 'application/x-www-form-urlencoded',
-		}
+    		uri: 'https://www.linkedin.com/oauth/v2/accessToken',
+    		qs: {
+    		    client_id: '77tgqz6flgej2j',
+    		    client_secret: 'jGjoCdApJjgkGtdG',
+    		    grant_type: 'authorization_code',
+    		    redirect_uri: 'http://reu-apply.com/auth/linkedin/callback',
+    		    code: req.query.code,
+    		    scope: 'r_fullprofile'
+    		},
+    		headers: {
+    		    'Content-Type': 'application/x-www-form-urlencoded',
+    		}
 	    };
 	    
 	    request.post(options, function(err, resp, body) {
 		if(err) throw err;
-		var data = JSON.parse(body)
+		var data = JSON.parse(body);
 		if(data.error) throw data.error;
-		if(data["access_token"] == undefined || data["access_token"] == 'undefined') throw "undefined return error"
-		user.linkedin.token = data["access_token"];
+		if(data.access_token === undefined || data.access_token === 'undefined') throw "undefined return error";
+		user.linkedin.token = data.access_token;
 		user.linkedin.timestamp = new Date();
 		user.save();
 
@@ -150,7 +141,7 @@ function getLinkedInProfile(user, res) {
 	user.recommendations_received = data.recommendationsReceived;
 	user.dob = data.dateOfBirth;
 	user.honors_awards = data.honorsAwards;
-	user.save()
+	user.save();
 	console.log(data);
 	res.render('profile', { user: user });
     });

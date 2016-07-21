@@ -1,0 +1,30 @@
+extends layout
+
+block title
+  title REU
+  
+block content
+  - if(typeof(flash) !== 'undefined') {
+    - if(flash.type === 'success') {
+      div.alert.alert-success
+        =flash.message
+    - }
+  - }
+
+  form.search-reu(action="/reu/search" method="post")
+    div.input-group
+      input.form-control(name="reu_search_info" placeholder="Search for...")
+      span.input-group-btn
+        button.btn.btn-default(type="button") Search
+
+    div.reu-search-results
+      - if(results) {
+        - if(results.length == 0) {
+          p No results found :(
+        - } else {
+          ul.reu-search-list
+            each result in results
+              li
+                p= result
+        - }
+    - }

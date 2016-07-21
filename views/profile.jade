@@ -3,17 +3,36 @@ extends layout
 block title
   title Profile
   
+block sidemenu
+  nav(class="sb-nav navbar navbar-light")
+    span.sb-header Profile
+    ul(class="nav navbar-nav sb-select")
+      li
+        a(href="#personal") Personal
+        a(href="#education") Education
+        a(href="#extracurricular") Extracurricular
+        a(href="#account") Account
+
 block content
-  div.content-header
-    h1#profile-header Profile
-    a.btn.btn-primary#edit-profile-button(href="/profile/edit") Edit
-  br
   - if(typeof(flash) !== 'undefined') {
     - if(flash.type === 'success') {
       div.alert.alert-success
         =flash.message
     - }
   - }
-  p#profile-section-header Account Info
-  p#profile-email-header Email
-  p#profile-email #{user.local.email}
+
+  br
+
+  div.content-container(id="personal")
+    p personal stuff ;)
+
+  div.content-container(id="education" hidden)
+    p academic stuff
+
+  div.content-container(id="extracurricular" hidden)
+    p extracurricular stuff
+
+  div.content-container(id="account" hidden)
+    p#profile-section-header Account Info
+    p#profile-email-header Email
+    p#profile-email #{user.local.email}

@@ -3,10 +3,17 @@ extends layout
 block title
   title Profile
 
+block sidemenu
+  nav(class="sb-nav navbar navbar-light")
+    span.sb-header Profile
+    ul(class="nav navbar-nav sb-select")
+      li
+        a(href="#personal") Personal
+        a(href="#education") Education
+        a(href="#extracurricular") Extracurricular
+        a(href="#account") Account
+
 block content
-  h1.content-header#profile-header Profile
-  br
-  br
   - if(typeof(flash) !== 'undefined') {
     - if(flash.type === 'invalid') {
       div.alert.alert-danger
@@ -16,10 +23,21 @@ block content
         =flash.message
     - }
   - }
-  form(method="post")
-    fieldset.form-group
-      label(for="editEmail") Email
-        input.form-control(id="editEmail" name="email" type="email" value="#{user.local.email}")
-    button.btn.btn-primary(type="submit") Save
-  br
-  a.btn.btn-primary(href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77tgqz6flgej2j&redirect_uri=http%3A%2F%2Freu-apply.com%2Fauth%2Flinkedin%2Fcallback&state=0928354") Update from LinkedIn
+
+  div.content-container(id="personal")
+    p personal stuff ;)
+
+  div.content-container(id="education" hidden)
+    p academic stuff
+
+  div.content-container(id="extracurricular" hidden)
+    p extracurricular stuff
+
+  div.content-container(id="account" hidden)
+    form(method="post")
+      fieldset.form-group
+        label(for="editEmail") Email
+          input.form-control(id="editEmail" name="email" type="email" value="#{user.local.email}")
+      button.btn.btn-primary(type="submit") Save
+    br
+    a.btn.btn-primary(href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77tgqz6flgej2j&redirect_uri=http%3A%2F%2Freu-apply.com%2Fauth%2Flinkedin%2Fcallback&state=0928354") Update from LinkedIn

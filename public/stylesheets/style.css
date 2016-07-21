@@ -7,22 +7,37 @@ a {
   color: #00B7FF;
 }
 
+.main-outer {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    padding: 0px;
+}
+
+.main-inner {
+    background-color: #FFF;
+    margin: 15px;
+}
+
 .tb-highlighted {
     color: #FFFFFF !important;
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: rgba(0,0,0,0.1) !important;
+}
+
+.navbar-fixed-top {
+    border-bottom: 0px;
 }
 
 .sb-nav {
-    display: block;
     float: left;
     background-color: rgba(0,0,0,0.2);
-    padding: 10px;
-    width: 10%;
+    padding: 0px;
     min-width: 100px;
-}
-
-.sb-nav {
     clear: left;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    border: 0px;
+    height: 100%;
+    border-radius: 0px;
 }
 
 .sb-nav ul {
@@ -41,29 +56,21 @@ a {
 
 .sb-header {
     color: #000;
-    display: block;
     float: left;
     clear: left;
-}
-
-.main {
-    margin-top: 10px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    background-color: #0A304E;
+    width: 100%;
+    color: white;
 }
 
 .content {
-    float: left;
-    margin-left: 10px;
     padding: 10px;
-    border: 1px solid #000000;
-    width: 80%;
-}
-
-.content-wide {
-    float: left;
-    margin-left: 10px;
-    padding: 10px;
-    border: 1px solid #000000;
-    width: 90%;
+    overflow: hidden;
+    height: 100%;
 }
 
 .content-header {
@@ -85,4 +92,18 @@ a {
 }
 
 #profile-email {
+}
+
+.reu-search-results {
+    margin-top: 20px;
+}
+
+.reu-search-list {
+    list-style: none;
+    padding: 0px;
+}
+
+.reu-search-list li {
+    background-color: rgba(0,0,0,0.1);
+    padding: 10px;
 }

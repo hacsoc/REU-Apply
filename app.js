@@ -36,6 +36,8 @@ app.use(flash());
 // Routing
 app.use('/', require('./routes/index'));
 app.use('/profile', require('./routes/profile'));
+app.use('/reu', require('./routes/reu'));
+app.use('/apps', require('./routes/application'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

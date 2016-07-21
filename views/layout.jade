@@ -18,28 +18,23 @@ html
               li
                 a(href="/home" id="dashboard") Dashboard
               li
-                a(href="/profile" id="profile") Profile
+                a(href="/apps" id="apps") Applications
+              li
+                a(href="/profile/edit" id="profile") Profile
+              li
+                a(href="/reu" id="reu") REUs
             ul(class="nav navbar-nav navbar-right")
               li
                 a(href="/logout") Logout
-    div.container
-      div(class="row main")
-        if side_menu
-          nav(class="sb-nav navbar navbar-light")
-            span.sb-header
-              = side_menu.title
-            ul(class="nav navbar-nav")
-              each item in side_menu.items
-                li
-                  a(href=item.href)= item.text
-          div.content
-            block content
-        else
-          div.content-wide
-            block content
+    div.container.main-outer
+      div.row.main-inner
+        block sidemenu
+        div.content
+          block content
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
     script(src="/javascripts/bootstrap.min.js")
+    script(src="/javascripts/init.js")
     script.
       var highlighted = $("##{tb_highlighted}");
       highlighted.attr("class", "tb-highlighted");
